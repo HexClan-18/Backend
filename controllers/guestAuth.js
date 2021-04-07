@@ -1,3 +1,4 @@
+// database validations
 const Guest = require("../models/Guest");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -58,7 +59,7 @@ exports.signupController = async (req, res) => {
         });
       });
     /***********************/
-
+    //sending the response to frontend
     res.json({
       successMessage: "Registration success. Please Login.",
     });
@@ -67,14 +68,8 @@ exports.signupController = async (req, res) => {
     res.status(500).json({
       errorMessage: "Server error",
     });
-
-    // console.log(newGuest.password);
-    //   } catch (err) {
-    //     console.log("signupController error:", err);
-    //   }
   }
 };
-// };
 
 /************************************
  *LOGIN CONTROLLER
@@ -108,6 +103,7 @@ exports.loginController = async (req, res) => {
       if (err) console.log("jwt error: ", err);
       const { _id, firstname, lastname, email, role } = user;
 
+      //the response that sending back to the client
       res.json({
         token,
         user: { _id, firstname, lastname, email, role },
