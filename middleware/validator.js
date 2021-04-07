@@ -1,3 +1,4 @@
+//Server-side validation
 const { check, validationResult } = require("express-validator");
 
 exports.signupValidator = [
@@ -18,9 +19,11 @@ exports.loginValidator = [
 
 exports.validatorResult = (req, res, next) => {
   const result = validationResult(req);
+  //checking whether result has any errors
   const hasErrors = !result.isEmpty();
 
   if (hasErrors) {
+    //catching the error msg in result object
     const firstError = result.array()[0].msg;
     return res.status(400).json({
       errorMessage: firstError,

@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express();
+const app = express(); //an instance of express
 const cors = require("cors");
 const morgan = require("morgan");
 const authRoutes = require("./routes/auth");
