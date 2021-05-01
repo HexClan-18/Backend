@@ -2,28 +2,37 @@ const mongoose = require("mongoose");
 
 const GuestSchema = new mongoose.Schema(
   {
+    
     firstname: {
       type: String,
-      required: true,
+      // required: true,
     },
     lastname: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type: String,
-      required: true,
+      //required: true,
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
+    },
+    bio: {
+      type: String,
+      // required: true,
+    },
+    city: {
+      type: String,
+      //required: true,
     },
     role: {
       type: Number,
       default: 3,
       //   1 - admin // 2 - owner // 3 - guest
     },
-    pic: {
+    profilePic: {
       type: String,
       default:
         "https://res.cloudinary.com/cnq/image/upload/v1586197723/noimage_d4ipmd.png",
