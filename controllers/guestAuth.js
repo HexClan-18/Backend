@@ -50,9 +50,9 @@ exports.signupController = async (req, res) => {
       /************************************
        *SENDGRID*
        ************************************/
-      .then((user) => {
+      .then((guest) => {
         transporter.sendMail({
-          to: user.email,
+          to: guest.email,
           from: "team.boardmein@gmail.com",
           subject: "Signup Success",
           html: "<h1> Welcome to BoardMeIn Family</h1>",
@@ -68,8 +68,14 @@ exports.signupController = async (req, res) => {
     res.status(500).json({
       errorMessage: "Server error",
     });
+
+    // console.log(newGuest.password);
+    //   } catch (err) {
+    //     console.log("signupController error:", err);
+    //   }
   }
 };
+// };
 
 /************************************
  *LOGIN CONTROLLER
