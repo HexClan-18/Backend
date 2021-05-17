@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 
 const GuestSchema = new mongoose.Schema(
   {
-    
     firstname: {
       type: String,
       // required: true,
@@ -21,10 +21,12 @@ const GuestSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
+      default: "",
       // required: true,
     },
-    city: {
+    location: {
       type: String,
+      default: "",
       //required: true,
     },
     role: {
@@ -32,10 +34,10 @@ const GuestSchema = new mongoose.Schema(
       default: 3,
       //   1 - admin // 2 - owner // 3 - guest
     },
-    profilePic: {
+    pic: {
       type: String,
       default:
-        "https://res.cloudinary.com/cnq/image/upload/v1586197723/noimage_d4ipmd.png",
+        "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
     },
   },
   { timestamps: true }
