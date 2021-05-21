@@ -6,7 +6,6 @@ const { jwtSecret, jwtExpire } = require("../config/keys");
 /************************************
  *SIGNUP CONTROLLER
  ************************************/
-
 exports.ownerSignupController = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
 
@@ -36,19 +35,12 @@ exports.ownerSignupController = async (req, res) => {
     res.status(500).json({
       errorMessage: "Server error",
     });
-
-    // console.log(newOwner.password);
-    //   } catch (err) {
-    //     console.log("ownerSignupController error:", err);
-    //   }
   }
 };
-// };
 
 /************************************
  *LOGIN CONTROLLER
  ************************************/
-
 exports.ownerLoginController = async (req, res) => {
   const { email, password } = req.body;
 
@@ -67,21 +59,22 @@ exports.ownerLoginController = async (req, res) => {
       });
     }
 
-    const payload = {
-      user: {
-        _id: user._id,
-      },
-    };
+    jwt.sign(
+      { _id: user._id },
+      jwtSecret,
+      { expiresIn: jwtExpire },
+      (err, token) => {
+        if (err) console.log("jwt error: ", err);
+        const { _id, firstname, lastname, email, role, bio, location, pic } =
+          user;
 
-    jwt.sign(payload, jwtSecret, { expiresIn: jwtExpire }, (err, token) => {
-      if (err) console.log("jwt error: ", err);
-      const { _id, firstname, lastname, email, role } = user;
-
-      res.json({
-        token,
-        user: { _id, firstname, lastname, email, role },
-      });
-    });
+        //the response that sending back to the client
+        res.json({
+          token,
+          user: { _id, firstname, lastname, email, role, bio, location, pic },
+        });
+      }
+    );
   } catch (err) {
     console.log("ownerLoginController error: ", err);
     res.status(500).json({
