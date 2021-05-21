@@ -6,21 +6,26 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./database/db");
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
+const ownerProfileRoutes = require("./routes/ownerprofile");
 const inquiryRoutes = require("./routes/inquiry");
+const verifyEmailRoutes = require("./routes/emailverify");
 
-/************************************
+/********************
  * MIDDLEWARES
- ************************************/
-
+ ********************/
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/ownerprofile", ownerProfileRoutes);
 app.use("/user", inquiryRoutes);
+app.use("/emailverify", verifyEmailRoutes);
 
+app.use(require("./routes/emailverify"));
 app.use(require("./routes/profile"));
+app.use(require("./routes/ownerprofile"));
 
 connectDB();
 
