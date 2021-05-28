@@ -28,6 +28,8 @@ const OwnerSchema = new mongoose.Schema(
       default: "",
       //required: true,
     },
+    resetToken: String,
+    expireToken: Date,
     role: {
       type: Number,
       default: 2,
@@ -36,7 +38,7 @@ const OwnerSchema = new mongoose.Schema(
     pic: {
       type: String,
       default:
-        "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRerBR3bfynBVdF2gjoii3i_8yI4KOdK5_cxw&usqp=CAU",
     },
   },
   { timestamps: true }
