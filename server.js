@@ -22,6 +22,7 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/ownerprofile", ownerProfileRoutes);
 app.use("/user", inquiryRoutes);
 app.use("/emailverify", verifyEmailRoutes);
+app.use("/emailverify/owner", verifyEmailRoutes);
 
 app.use(require("./routes/emailverify"));
 app.use(require("./routes/profile"));
