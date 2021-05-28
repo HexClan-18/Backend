@@ -1,10 +1,13 @@
-// database validations
 const Guest = require("../models/Guest");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { jwtSecret, jwtExpire } = require("../config/keys");
+const {
+  jwtSecret,
+  jwtExpire,
+  sendgridApiKey,
+  activationTokenSecret,
+} = require("../config/keys");
 const sgMail = require("@sendgrid/mail");
-const { sendgridApiKey, activationTokenSecret } = require("../config/keys");
 sgMail.setApiKey(sendgridApiKey);
 
 /************************************
@@ -34,15 +37,15 @@ exports.signupController = async (req, res) => {
     const activation_token = createActivationToken(newGuest);
 
     const msg = {
-      from: "bhnsandu69@gmail.com",
+      from: "team.boardmein@gmail.com",
       to: newGuest.email,
       subject: "Board Me In - verify your email",
       text: `
-          Hello, Thanks for registering on Board-Me-In.
+          Hello, Thank you for registering on Board-Me-In.
           Please copy and paste the address below to verify your account.
           http://localhost:3000/guest/emailverify/${activation_token}`,
       html: `<h1>Hello ${newGuest.firstname},</h1>
-          <p>Thanks for registering on Board-Me-In.</p>
+          <p>Thank You for registering on Board-Me-In.</p>
           <p>Please click the below link to verify your account.</p>
           <a href="http://localhost:3000/guest/emailverify/${activation_token}"> Verify My Account </a>
           `,
@@ -73,7 +76,7 @@ exports.activateEmail = async (req, res) => {
     const { activation_token } = req.body;
     const user = jwt.verify(activation_token, activationTokenSecret);
 
-    const { firstname, lastname, email, password, isverified } = user;
+    const { firstname, lastname, email, password } = user;
 
     const check = await Guest.findOne({ email });
     if (check)
@@ -87,7 +90,6 @@ exports.activateEmail = async (req, res) => {
       lastname,
       email,
       password,
-      isverified,
     });
 
     await newGuest.save();
