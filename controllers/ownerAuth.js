@@ -50,15 +50,6 @@ exports.ownerSignupController = async (req, res) => {
           <a href="http://localhost:3000/owner/oemailverify/${activation_token}"> Verify My Account </a>
           `,
     };
-    // const newOwner = new Owner();
-    // newOwner.firstname = firstname;
-    // newOwner.lastname = lastname;
-    // newOwner.email = email;
-
-    // const salt = await bcrypt.genSalt(10);
-    // newOwner.password = await bcrypt.hash(password, salt);
-
-    // await newOwner.save();
 
     res.json({
       successMessage:

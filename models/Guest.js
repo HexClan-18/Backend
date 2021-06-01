@@ -15,12 +15,7 @@ const GuestSchema = new mongoose.Schema(
     password: {
       type: String,
     },
-    // emailToken: {
-    //   type: String,
-    // },
-    // isVerified: {
-    //   type: Boolean,
-    // },
+
     bio: {
       type: String,
       default: "",

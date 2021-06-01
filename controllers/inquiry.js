@@ -1,5 +1,6 @@
 const Inquiry = require("../models/Inquiry");
-
+// var moment = require('moment');
+// var date=moment(new Date()).format("MM/DD/YYYY");
 //for create inquiry
 exports.createInquiry = async function (req, res) {
   var newInquiry = new Inquiry(req.body);
@@ -108,7 +109,7 @@ exports.updateAInquiry = async function (req, res) {
 //to get all inquiries
 exports.getAllInquiry = async function (req, res) {
   try {
-    await Inquiry.find({}, function (err, inquiry) {
+    await Inquiry.find({}, [], { sort: { _id: -1 } }, function (err, inquiry) {
       if (err) {
         res.status(400).json({
           status: false,
