@@ -11,7 +11,6 @@ const inquiryRoutes = require("./routes/inquiry");
 const verifyEmailRoutes = require("./routes/emailverify");
 const dashboardRoutes = require("./routes/dashboard");
 require('dotenv').config()
-const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload')
 
 /********************

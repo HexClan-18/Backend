@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const requireLogin = require("../middleware/requireLogin");
 const Guest = require("../models/Guest");
-const Products = require("../models/product");
+const Products = require("../models/productModel");
 
 router.get("/allproducts", requireLogin, (req, res) => {
   Products.find()
