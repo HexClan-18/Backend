@@ -10,6 +10,9 @@ const ownerProfileRoutes = require("./routes/ownerprofile");
 const inquiryRoutes = require("./routes/inquiry");
 const verifyEmailRoutes = require("./routes/emailverify");
 const dashboardRoutes = require("./routes/dashboard");
+require('dotenv').config()
+const mongoose = require('mongoose')
+const fileUpload = require('express-fileupload')
 
 /********************
  * MIDDLEWARES
@@ -18,6 +21,9 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
+app.use(fileUpload({
+    useTempFiles: true
+}))
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/ownerprofile", ownerProfileRoutes);
@@ -31,11 +37,17 @@ app.use(require("./routes/profile"));
 app.use(require("./routes/ownerprofile"));
 app.use(require("./routes/dashboard"));
 
-connectDB();
-
+app.use('/user', require('./routes/userRouter'))
+app.use('/api', require('./routes/categoryRouter'))
+app.use('/api', require('./routes/upload'))
+app.use('/api', require('./routes/productRouter'))
 app.get("/", (req, res) => {
     res.send("inside server");
 });
 
-const port = 5000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+
+connectDB();
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+    console.log('Server is running on port', PORT)
+})
