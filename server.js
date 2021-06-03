@@ -10,6 +10,7 @@ const ownerProfileRoutes = require("./routes/ownerprofile");
 const inquiryRoutes = require("./routes/inquiry");
 const verifyEmailRoutes = require("./routes/emailverify");
 const dashboardRoutes = require("./routes/dashboard");
+const userByToken = require("./routes/userFromTokenRouter")
 require('dotenv').config()
 const fileUpload = require('express-fileupload')
 
@@ -43,6 +44,7 @@ app.use('/api', require('./routes/productRouter'))
 app.use('/api', require('./routes/paymentRoute'))
 app.use('/api', require('./routes/comments'))
 app.use('/api', require('./routes/property'))
+app.use('/api', userByToken)
 app.get("/", (req, res) => {
     res.send("inside server");
 });

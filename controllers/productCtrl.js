@@ -100,6 +100,19 @@ const productCtrl = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
+    },
+    getProById: async (req, res) => {
+        try {
+            const products = await Products.findById(req.params.id)
+            res.json({
+                status: 'success',
+                result: 1,
+                products: products
+            })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
     }
 }
 

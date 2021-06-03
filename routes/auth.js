@@ -32,6 +32,7 @@ router.post(
   validatorResult,
   ownerLoginController
 );
+
 router.post("/guestlogin", loginValidator, validatorResult, loginController);
 
 module.exports = router;
